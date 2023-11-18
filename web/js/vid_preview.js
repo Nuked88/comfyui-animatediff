@@ -98,6 +98,10 @@ export const CreatePreviewElement = (name, val, format, callback) => {
 const videoPreview = {
   name: "AnimateDiff.VideoPreview",
   async beforeRegisterNodeDef(nodeType, nodeData, app) {
+    if (nodeData.name !== "AnimateDiffCombine") {
+      return
+    }
+
     const onExecuted = nodeType.prototype.onExecuted;
     if (nodeData.name === "AnimateDiffCombine") {
       nodeType.prototype.onExecuted = function (message) {
